@@ -4,11 +4,11 @@
 #include "filmes.h"
 
 static filme_t filmes[MAX_FILMES];
-static int num_filmes = 0; //static = só consigo acessar essa variável dentro do arquivo (semelhante ao private de java)
+static int num_filmes = 0;
 
-int filmes_menor (filme_t *a1, filme_t *a2) {
-	if( strcmp(a1->nome, a2->nome) < 0) return -1;
-	if( strcmp(a1->nome, a2->nome) > 0) return 1;
+int filmes_menor (filme_t *f1, filme_t *f2) {
+	if( strcmp(f1->nome, f2->nome) < 0) return -1;
+	if( strcmp(f1->nome, f2->nome) > 0) return 1;
 	return 0;
 }
 
@@ -20,25 +20,19 @@ int filmes_carrega (char *nome_arq) {
 	while (1) {
 		if(num_filmes >= MAX_FILMES) break;
 		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
-		filmes[num_filmes].id_filme = atoi(linha); //atoi = conversor de string para inteiro
-		if(fgets(filmes[num_filmes].nome, TAM_NOME+1, f) == NULL) break; // essa linha já adiciona o valor direto dentro do nome, sem precisar converter, pois ambos são string. É necessário, nesse caso, fazer o processamento do \n, que vem ao final de todas as linhas
+		filmes[num_filmes].id_filme = atoi(linha);
+		if(fgets(filmes[num_filmes].nome, TAM_NOME+1, f) == NULL) break;
 		int tam = strlen(filmes[num_filmes].nome);
 		if(filmes[num_filmes].nome[tam-1] =='\n') {
 			filmes[num_filmes].nome[tam-1] ='\0';
 		}
-		//FAZER PARA OS OUTROS DADOS (DATA DE NASCIMENTO E MORTE)
-		if(fgets(linha, TAM_NOME+1, f) == NULL) break; //verifica linha a linha, cada linha é uma info...
-		filmes[num_filmes].id_filme = atoi(linha);
 		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
-		filmes[num_filmes].id_filme = atoi(linha);
-		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
-		filmes[num_filmes].id_filme = atoi(linha);
-		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
-		filmes[num_filmes].id_filme = atoi(linha);
-		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
-		filmes[num_filmes].id_filme = atoi(linha);
-		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
-		filmes[num_filmes].id_filme = atoi(linha);
+		filmes[num_filmes].faixa_etaria = atoi(linha);
+		if(fgets(filmes[num_filmes].estilo, TAM_NOME+1, f) == NULL) break;
+		tam = strlen(filmes[num_filmes].estilo);
+		if(filmes[num_filmes].estilo[tam-1] =='\n') {
+			filmes[num_filmes].estilo[tam-1] ='\0';
+		}
 		
 		
 		++num_filmes;
@@ -67,7 +61,6 @@ filme_t *filmes_obtem_filme_indice(int indice){
 	return &filmes[indice];
 }
 
-//TODO - FEITO
 void filmes_mostra_filme(filme_t *filme){
 	if(filme->faixa_etaria == 0){
           //Besouro Azul [1] - LIVRE - Ação
@@ -78,7 +71,6 @@ void filmes_mostra_filme(filme_t *filme){
 	}
 }
 
-//TODO - FEITO
 void filmes_mostra(){
 	for (int i=0; i<num_filmes; ++i) {
 		filmes_mostra_filme( &filmes[i] );
@@ -86,7 +78,6 @@ void filmes_mostra(){
 }
 
 void filmes_ordena() {
-	// Professor implementou o selection sort, mas posso fazer qualquer que eu queira.
 	for (int i=0; i<num_filmes; ++i) {
 		int menor = i;
 		for (int j= i+1; j < num_filmes; ++j) {
@@ -101,10 +92,10 @@ void filmes_ordena() {
 	}
 }
 
+//TODO - PERGUNTAR AO PROFESSOR SE NA SAÍDA A FAIXA ETÁRIA 0 DEVE SER NUMÉRICA OU COM O "LIVRE" NO LUGAR
 int filmes_salva(char *nome_arq){
-	//TODO - PERGUNTAR AO PROFESSOR SE NA SAÍDA A FAIXA ETÁRIA 0 DEVE SER NUMÉRICA OU COM O "LIVRE" NO LUGAR
 	FILE *f = fopen(nome_arq, "w");
-	if(f ==NULL) return 0;
+	if(f == NULL) return 0;
 
 	for (int i=0; i < num_filmes; ++i) {
 		fprintf(f, "%d\n", filmes[i].id_filme);
