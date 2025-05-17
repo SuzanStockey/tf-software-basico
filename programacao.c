@@ -3,6 +3,8 @@
 #include <string.h>
 #include "programacao.h"
 
+
+//TODO - GERAR MAKEFILE
 static programacao_t programacao[MAX_PROGRAMAS];
 static int num_programas = 0;
 
