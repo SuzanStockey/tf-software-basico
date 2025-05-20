@@ -40,13 +40,13 @@ int cinemas_carrega (char *nome_arq) {
 		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
 		cinemas[num_cinemas].numero = atoi(linha);
 
-		if(fgets(cinemas[num_cinemas].complemento, TAM_NOME+1, f) == NULL) break;
+		if(fgets(cinemas[num_cinemas].complemento, TAM_COMPLEMENTO+1, f) == NULL) break;
 		tam = strlen(cinemas[num_cinemas].complemento);
 		if(cinemas[num_cinemas].complemento[tam-1] =='\n') {
 			cinemas[num_cinemas].complemento[tam-1] ='\0';
 		}
 
-		if(fgets(cinemas[num_cinemas].bairro, TAM_NOME+1, f) == NULL) break;
+		if(fgets(cinemas[num_cinemas].bairro, TAM_BAIRRO+1, f) == NULL) break;
 		tam = strlen(cinemas[num_cinemas].bairro);
 		if(cinemas[num_cinemas].bairro[tam-1] =='\n') {
 			cinemas[num_cinemas].bairro[tam-1] ='\0';
@@ -58,7 +58,7 @@ int cinemas_carrega (char *nome_arq) {
 			cinemas[num_cinemas].cep[tam-1] ='\0';
 		}
 
-		if(fgets(cinemas[num_cinemas].cidade, TAM_NOME+1, f) == NULL) break;
+		if(fgets(cinemas[num_cinemas].cidade, TAM_CIDADE+1, f) == NULL) break;
 		tam = strlen(cinemas[num_cinemas].cidade);
 		if(cinemas[num_cinemas].cidade[tam-1] =='\n') {
 			cinemas[num_cinemas].cidade[tam-1] ='\0';
@@ -106,7 +106,7 @@ cinema_t *cinemas_obtem_cinema_indice(int indice){
 //FEITO
 void cinemas_mostra_cinema(cinema_t *cinema){
 	printf("%s [%d]\n", cinema->nome, cinema->id_cinema);
-	if(cinema->numero == -1){ //TODO - PERGUNTAR SE COMPLEMENTO TB PODE VIR COM -1
+	if(cinema->numero == -1){
 		printf("%s - %s - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->complemento, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);
 	} else{
 		printf("%s, %d - %s - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->numero, cinema->complemento, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);

@@ -28,7 +28,7 @@ int filmes_carrega (char *nome_arq) {
 		}
 		if(fgets(linha, TAM_NOME+1, f) == NULL) break;
 		filmes[num_filmes].faixa_etaria = atoi(linha);
-		if(fgets(filmes[num_filmes].estilo, TAM_NOME+1, f) == NULL) break;
+		if(fgets(filmes[num_filmes].estilo, TAM_ESTILO+1, f) == NULL) break;
 		tam = strlen(filmes[num_filmes].estilo);
 		if(filmes[num_filmes].estilo[tam-1] =='\n') {
 			filmes[num_filmes].estilo[tam-1] ='\0';
@@ -92,7 +92,6 @@ void filmes_ordena() {
 	}
 }
 
-//TODO - PERGUNTAR AO PROFESSOR SE NA SAÍDA A FAIXA ETÁRIA 0 DEVE SER NUMÉRICA OU COM O "LIVRE" NO LUGAR
 int filmes_salva(char *nome_arq){
 	FILE *f = fopen(nome_arq, "w");
 	if(f == NULL) return 0;

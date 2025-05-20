@@ -1,8 +1,11 @@
 #define TAM_NOME 60
 #define TAM_CEP 10
 #define TAM_ESTADO 3
-#define TAM_LOGRADOURO 100 //TODO - PERGUNTAR TAMANHO
-#define MAX_CINEMAS 100
+#define TAM_CIDADE 40
+#define TAM_LOGRADOURO 60
+#define TAM_COMPLEMENTO 40
+#define TAM_BAIRRO 40
+#define MAX_CINEMAS 50
 
 
 typedef struct {
@@ -10,10 +13,10 @@ typedef struct {
 	char nome[TAM_NOME+1];
 	char logradouro[TAM_LOGRADOURO+1];
 	int numero;
-	char complemento[TAM_NOME+1];
-	char bairro[TAM_NOME+1];
+	char complemento[TAM_COMPLEMENTO+1];
+	char bairro[TAM_BAIRRO+1];
 	char cep[TAM_CEP+1];
-	char cidade[TAM_NOME+1];
+	char cidade[TAM_CIDADE+1];
 	char estado[TAM_ESTADO+1];
 	int num_salas;
 } cinema_t;
