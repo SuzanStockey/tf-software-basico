@@ -7,7 +7,7 @@ app2:		app2.o cinemas.o
 		gcc -o app2 app2.o cinemas.o
 
 app3:		app3.o filmes.o cinemas.o programacao.o
-		gcc -o app3.o filmes.o cinemas.o programacao.o
+		gcc -o app3 app3.o filmes.o cinemas.o programacao.o
 
 app1.o:		app1.c filmes.h
 		gcc -c app1.c
