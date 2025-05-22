@@ -107,9 +107,18 @@ cinema_t *cinemas_obtem_cinema_indice(int indice){
 void cinemas_mostra_cinema(cinema_t *cinema){
 	printf("%s [%d]\n", cinema->nome, cinema->id_cinema);
 	if(cinema->numero == -1){
-		printf("%s - %s - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->complemento, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);
+		if (cinema->complemento[0] == '\0') {
+			printf("%s - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);
+		} else {
+			printf("%s - %s - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->complemento, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);
+		}
 	} else{
-		printf("%s, %d - %s - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->numero, cinema->complemento, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);
+		if (cinema->complemento[0] == '\0') {
+			printf("%s, %d - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->numero, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);
+		}
+		else {
+			printf("%s, %d - %s - Bairro %s - CEP %s - %s - %s\n", cinema->logradouro, cinema->numero, cinema->complemento, cinema->bairro, cinema->cep, cinema->cidade, cinema->estado);
+		}
 	}
 	printf("Cinema(s): %d\n", cinema->num_salas);
 }
